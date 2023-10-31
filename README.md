@@ -1,3 +1,4 @@
+![37-fibonacci-AVL-RB](https://github.com/maxgoren/TreeVisualizer/assets/65133477/2e2f9956-3037-4cdf-bebe-2cacef2d9b67)
 ![35-random-BST-LLRB](https://github.com/maxgoren/TreeVisualizer/assets/65133477/a7c618e9-0b2f-4edb-b291-736ca452673d)
 # TreeVisualizer
 A simple C++ utility to generate images of binary search trees using SFML 2.
