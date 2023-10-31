@@ -1,7 +1,14 @@
-![37-fibonacci-AVL-RB](https://github.com/maxgoren/TreeVisualizer/assets/65133477/2e2f9956-3037-4cdf-bebe-2cacef2d9b67)
-![35-random-BST-LLRB](https://github.com/maxgoren/TreeVisualizer/assets/65133477/a7c618e9-0b2f-4edb-b291-736ca452673d)
 # TreeVisualizer
 A simple C++ utility to generate images of binary search trees using SFML 2.
+
+## Examples
+![145-rand-RB](https://github.com/maxgoren/TreeVisualizer/assets/65133477/173c372e-8aae-460a-8337-57c59712b340)
+A Larege Red Black Tree.
+![130-random-splay](https://github.com/maxgoren/TreeVisualizer/assets/65133477/b0bbcd19-f8f5-4ace-8501-ab937d515cc3)
+A Large Splay Tree
+![35-random-BST-LLRB](https://github.com/maxgoren/TreeVisualizer/assets/65133477/a7c618e9-0b2f-4edb-b291-736ca452673d)
+An unbalanced BST and Left Leaning Red Black Tree
+
 
 ## Files
 ```
