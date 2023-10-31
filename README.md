@@ -1,3 +1,4 @@
+<img width="927" alt="25-node-random-sequence" src="https://github.com/maxgoren/TreeVisualizer/assets/65133477/a10125af-1a85-4c5b-ac82-25d8fb088441">
 # TreeVisualizer
 A simple C++ utility to generate images of binary search trees using SFML 2.
 
