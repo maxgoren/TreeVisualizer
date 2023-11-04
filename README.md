@@ -23,6 +23,7 @@ An unbalanced BST and Left Leaning Red Black Tree
 ## The Basic Idea
   TreeDraw works by iterating over a binry tree in two ways. The first pass is an in-order traversal which
   calculated each nodes x/y coordinates. A second, breadth-first (level order) traversal is then performed 
-  to calculate the end point coordinates for the edges which connect the vertices. The result is a visual 
+  to pair up the nodes point coordinates for the edges which connect the vertices to its children. Future plan
+  is to remove the breadth first step and draw edges and nodes at the same time. The result is a visual 
   representation of the tree, which is both displayed to the screen and also saved in the current working 
   directory as tree.jpg
