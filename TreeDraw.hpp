@@ -42,6 +42,9 @@ enum TREETYPE {
 template <class K, class V>
 class TreeDraw {
     private:
+        int XSCALER = 12;
+        int YSCALER = 12;
+        int NODESIZE = 12;
         TREETYPE treeType;
         using nodeptr = rbnode<K,V>*;
         int X;
@@ -50,18 +53,15 @@ class TreeDraw {
         nodeptr head;
         unordered_map<K, pair<int,int>> coordsAndKeys;
         vector<sf::CircleShape> nodes;
+        vector<sf::Text> labels;
         using sfLine = sf::Vertex*;
         vector<sfLine> edges;
         void mark(nodeptr h) {
             Y++;
             if (h != nilmarker) {
                 mark(h->left);
-                sf::CircleShape tmp(13);
-                tmp.setPosition(((++X)*22), (Y*2)*22);
-                if (h == head) {
-                    tmp.setOutlineColor(sf::Color::Blue);
-                    tmp.setOutlineThickness(5);
-                }
+                sf::CircleShape tmp(NODESIZE);
+                tmp.setPosition(((++X)*XSCALER), (Y*2)*YSCALER);
                 switch (treeType) {
                     case AVLT:       tmp.setFillColor(sf::Color::Blue);
                                     break;
@@ -77,7 +77,21 @@ class TreeDraw {
                 
                 }
                 nodes.push_back(tmp);
-                coordsAndKeys[h->key] = make_pair((X)*22,(Y*2)*22);
+                int nx = (X)*XSCALER;
+                int ny = (Y*2)*YSCALER;
+                coordsAndKeys[h->id] = make_pair(nx,ny);
+                sf::Text label;
+                label.setFont(font);
+                string _str;
+                _str.push_back(h->key);
+                label.setString(_str);
+                label.setCharacterSize(27);
+                if (treeType == REDBLACK)
+                    label.setColor(sf::Color::White);
+                else label.setColor(sf::Color::Black);
+                label.setOrigin(0,0);
+                label.setPosition(nx, (ny-Y));
+                labels.push_back(label);
                 mark(h->right);
             }
             Y--;
@@ -89,20 +103,26 @@ class TreeDraw {
                 h = fq.front();
                 fq.pop();
                 if (h != nilmarker) {
-                    auto v = coordsAndKeys[h->key];
+                    auto v = coordsAndKeys[h->id];
                     if (h->left != nilmarker) {
-                        auto u = coordsAndKeys[h->left->key];
-                        sfLine line = new sf::Vertex[2] { 
-                            sf::Vertex(sf::Vector2f(v.first+5, v.second+5)), sf::Vertex(sf::Vector2f(u.first+5, u.second+5))
+                        auto u = coordsAndKeys[h->left->id];
+                        int offy = 6;
+                        int offx = 7;
+                        if (v.first < u.first) offx *= -1;
+                        sfLine line = new sf::Vertex[2] {
+                            sf::Vertex(sf::Vector2f(v.first+offx, v.second+offy)), sf::Vertex(sf::Vector2f(u.first+offx, u.second+offy))
                         };
                         line[0].color = sf::Color::Black;
                         line[1].color = sf::Color::Black;
                         edges.push_back(line);
                     }
                     if (h->right != nilmarker) {
-                        auto u = coordsAndKeys[h->right->key];
+                        auto u = coordsAndKeys[h->right->id];
+                        int offy = 6;
+                        int offx = 6;
+                        if (v.first > u.first) offx *= -1;
                         sfLine line = new sf::Vertex[2] { 
-                            sf::Vertex(sf::Vector2f(v.first, v.second)), sf::Vertex(sf::Vector2f(u.first, u.second))
+                            sf::Vertex(sf::Vector2f(v.first+offx, v.second+offy)), sf::Vertex(sf::Vector2f(u.first+offx, u.second+offy))
                         };   
                         line[0].color = sf::Color::Black;
                         line[1].color = sf::Color::Black;                   
@@ -113,11 +133,14 @@ class TreeDraw {
                 }
             }
         }
+        sf::Font font;
+        int treenum;
     public:
         TreeDraw() {
-            
+            treenum = 0;
         }
         void mark(rbnode<K,V>* root, rbnode<K,V>* nil, TREETYPE treetype) {
+            treenum++;
             treeType = treetype;
             nilmarker = nil;
             head = root;
@@ -126,7 +149,12 @@ class TreeDraw {
             markEdges(root);
         }
         void drawTree() {
-            sf::RenderWindow window(sf::VideoMode(1790,500), "Self-Balanacing Binary Search Trees");
+            sf::RenderWindow window(sf::VideoMode(1600,500), "Self-Balanacing Binary Search Trees");
+            window.setVerticalSyncEnabled(true); //little lion so rough
+            if (!font.loadFromFile("./font.ttf")) {
+                std::cerr<<"Nah dog, couldnt open that font my G."<<endl;
+                return;
+            }
             while (window.isOpen()) {
                 sf::Event event;
                 while (window.pollEvent(event)) {
@@ -143,9 +171,14 @@ class TreeDraw {
                 for (auto node : nodes) {
                     window.draw(node);
                 }
+                for (auto label : labels) {
+                    window.draw(label);
+                }
                 window.display();
             }
         }
 };
+
+
 
 #endif

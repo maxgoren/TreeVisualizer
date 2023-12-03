@@ -27,6 +27,7 @@ SOFTWARE.
 #include "avl.hpp"
 #include "binarysearchtree.hpp"
 #include "redblack.hpp"
+#include "splay.hpp"
 using namespace std;
 
 bool hasAVLFlag(char* arg) {
@@ -53,6 +54,14 @@ bool hasRBFlag(char *arg) {
     return false;
 }
 
+bool hasSplayFlag(char *arg) {
+    for (int i = 1; arg[i]; i++) {
+        if (arg[i] == 'S')
+            return true;
+    }
+    return false;
+}
+
 bool hasLLRBFlag(char *arg) {
     for (int i = 1; arg[i]; i++) {
         if (arg[i] == 'L')
@@ -66,14 +75,21 @@ int main(int argc, char *argv[]) {
     TreeDraw<long, long> td;
     AVL<long, long> avl;
     BinarySearchTree<long, long> bst;
-    LeftLeaningRedBlack<long, long> llrb;
+    //LeftLeaningRedBlack<long, long> llrb;
+    LLRB<long,long> llrb;
     RedBlack<long, long> rb;
+    splay_tree<long> splay;
+    int prev = 0, curr = 1;
     for (int i = 0; i < atoi(argv[2]); i++) {
+        int next = prev + curr;
+        prev = curr;
+        curr = next;
         int p = rand() % RAND_MAX;
         llrb.insert(p, i);
         rb.insert(p,i);
         avl.insert(p, i);
         bst.insert(p,i);
+        splay.insert(p);
     }
     if (hasAVLFlag(argv[1]))
         td.mark(avl.rootNode(), avl.nil(), AVLT);
@@ -83,6 +99,9 @@ int main(int argc, char *argv[]) {
         td.mark(llrb.rootNode(), llrb.nil(), REDBLACK);
     if (hasRBFlag(argv[1]))
         td.mark(rb.rootNode(), rb.nil(), REDBLACK);
+    if (hasSplayFlag(argv[1]))
+        td.mark(splay.rootNode(), splay.nil(), AVLT);
     td.drawTree();
     return 0;
 }
+

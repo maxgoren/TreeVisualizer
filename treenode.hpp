@@ -8,6 +8,7 @@ template <class K, class V>
 struct rbnode {
     K key;
     V value;
+    int id;
     int height;
     bool color;
     rbnode* left;
@@ -23,6 +24,14 @@ struct rbnode {
         left = nullptr; right = nullptr;
         parent = nullptr;
         height = 0;
+    }
+    rbnode(K key) {
+        this->key = key;
+        this->value = key;
+        color = true;
+    }
+    rbnode() {
+        color = true;
     }
 };
 
