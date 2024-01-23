@@ -22,11 +22,26 @@ UPDATE: As of 1/2024 node labeling, and tiling have been aded, so capturing sequ
 ```
 
 ## The Basic Idea
-  TreeDraw works by iterating over a binry tree in two ways. The first pass is an in-order traversal which
+  TreeDraw works by performing two traversals of a binry tree in. The first pass is an in-order traversal which
   calculated each nodes x/y coordinates. A second, breadth-first (level order) traversal is then performed 
-  to pair up the nodes point coordinates for the edges which connect the vertices to its children. Future plan
-  is to remove the breadth first step and draw edges and nodes at the same time. The result is a visual 
-  representation of the tree, which is both displayed to the screen and also saved in the current working 
+  to pair up the nodes point coordinates for the edges which connect the vertices to its children. 
+  The result is a graphical representation of the tree, which is both displayed to the screen and also saved in the current working 
   directory as tree.jpg
+
+## How to use
+   Right now the code depends on you using the supplied treenode.hpp as the node for the binary tree you're building. In the future I plan
+   to remove this dependency, possibly with the visitor pattern. Instantiate a TreeDraw object, and when you have the tree you wish to depict,
+   you use the mark(root, nullmarker, treetype) method to perform a traversal of the tree, and then invoke drawTree().
+   ```
+       int main() {
+           TreeDraw<int,int> td;
+           BST<int,int> bst;
+          for (int i = 0; i < 10; i++) {
+            bst.insert(rand() % 50, i);
+            td.mark(bst.rootNode(), nullptr, AVLTREE)
+          }
+          td.drawTree();
+       }
+   ```
 
   
