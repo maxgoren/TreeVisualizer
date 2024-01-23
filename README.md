@@ -35,12 +35,12 @@ UPDATE: As of 1/2024 node labeling, and tiling have been aded, so capturing sequ
    ```
        int main() {
            TreeDraw<int,int> td;
-           BST<int,int> bst;
-          for (int i = 0; i < 10; i++) {
-            bst.insert(rand() % 50, i);
-            td.mark(bst.rootNode(), nullptr, AVLTREE)
-          }
-          td.drawTree();
+           RedBlackTree<int,int> bst;
+           for (int i = 0; i < 10; i++) {
+              bst.insert(rand() % 50, i);
+              td.mark(bst.rootNode(), nullptr, REDBLACK)
+           }
+           td.drawTree();
        }
    ```
 
