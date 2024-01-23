@@ -8,7 +8,8 @@ A Larege Red Black Tree.
 A Large Splay Tree
 ![35-random-BST-LLRB](https://github.com/maxgoren/TreeVisualizer/assets/65133477/a7c618e9-0b2f-4edb-b291-736ca452673d)
 An unbalanced BST and Left Leaning Red Black Tree
-
+![Insertion-Sequence](https://github.com/maxgoren/TreeVisualizer/assets/65133477/27cd8564-b16f-4f80-aa6a-615596f43146)
+UPDATE: As of 1/2024 node labeling, and tiling have been aded, so capturing sequences of insertions, etc is much easier.
 
 ## Files
 ```
@@ -27,3 +28,5 @@ An unbalanced BST and Left Leaning Red Black Tree
   is to remove the breadth first step and draw edges and nodes at the same time. The result is a visual 
   representation of the tree, which is both displayed to the screen and also saved in the current working 
   directory as tree.jpg
+
+  
