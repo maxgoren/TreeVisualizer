@@ -43,5 +43,6 @@ UPDATE: As of 1/2024 node labeling, and tiling have been aded, so capturing sequ
            td.drawTree();
        }
    ```
+![image](https://github.com/maxgoren/TreeVisualizer/assets/65133477/5feb6f4e-cf9f-460a-8434-a5b3e00088ff)
 
   
