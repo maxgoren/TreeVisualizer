@@ -1,6 +1,6 @@
 #ifndef avl_hpp
 #define avl_hpp
-
+#include "../include/treenode.hpp"
 template <class K, class V>
 class AVL {
     private:
@@ -8,10 +8,10 @@ class AVL {
         Node root;
         int count;
         int height(Node h) {
-            return (h == nullptr) ? -1:h->height;
+            return (h == nullptr) ? -1:h->N;
         }
         Node adjustheight(Node h) {
-            h->height = 1+max(height(h->left), height(h->right));
+            h->N = 1+max(height(h->left), height(h->right));
             return h;
         }
         Node rotL(Node h) {
@@ -50,7 +50,7 @@ class AVL {
             if (h == nullptr) {
                 return new rbnode<K,V>(key, value);
             }
-            if (key < h->key) h->left = insert(h->left, key, value);
+            if (key < h->info.key()) h->left = insert(h->left, key, value);
             else h->right = insert(h->right, key, value);
             h = adjustheight(h);
             return balance(h);
@@ -58,12 +58,12 @@ class AVL {
         void inorder(Node h) {
             if (h == nullptr) return;
             inorder(h->left);
-            cout<<h->key<<" ";
+            cout<<h->info.key()<<" ";
             inorder(h->right);
         }
         void visit(Node h) {
             if (h != nullptr) {
-                cout<<h->key<<" ";
+                cout<<h->info.key()<<" ";
                 visit(h->left);
                 visit(h->right);
             }

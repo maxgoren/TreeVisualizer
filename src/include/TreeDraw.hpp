@@ -84,7 +84,7 @@ class TreeDraw {
                 coordsAndKeys[h->id] = make_pair(nx,ny);
                 sf::Text label;
                 label.setFont(font);
-                string _str = to_string(h->key);
+                string _str = to_string(h->info.key());
                 label.setString(_str);
                 label.setCharacterSize(18);
                 if (treeType == REDBLACK) {

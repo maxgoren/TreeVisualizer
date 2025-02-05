@@ -1,21 +1,18 @@
 #ifndef treenode_hpp
 #define treenode_hpp
-
+#include "kvpair.hpp"
 const bool red = true;
 const bool black = false;
 
 template <class K, class V>
 struct rbnode {
-    K key;
-    V value;
+    KVPair<K,V> info;
     int id;
     bool color;
     int N;
     rbnode* left;
     rbnode* right;
-
-    rbnode(K key_, V value_) {
-        key = key_; value = value_;
+    rbnode(K key_, V value_) : info(key_, value_) {
         color = true;
         left = nullptr; right = nullptr;
         N = 0;

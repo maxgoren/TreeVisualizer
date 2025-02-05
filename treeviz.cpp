@@ -23,84 +23,38 @@ SOFTWARE.
 */
 
 #include <iostream>
-#include "TreeDraw.hpp"
-#include "avl.hpp"
-#include "binarysearchtree.hpp"
-#include "redblack.hpp"
-#include "splay.hpp"
+#include "src/include/TreeDraw.hpp"
+#include "dict.hpp"
+#include "src/example/avl.hpp"
 using namespace std;
 
-bool hasAVLFlag(char* arg) {
-    for (int i = 1; arg[i]; i++) {
-        if (arg[i] == 'A')
-            return true;
-    }
-    return false;
-}
-
-bool hasBSTFlag(char* arg) {
-    for (int i = 1; arg[i]; i++) {
-        if (arg[i] == 'B')
-            return true;
-    }
-    return false;
-}
-
-bool hasRBFlag(char *arg) {
-    for (int i = 1; arg[i]; i++) {
-        if (arg[i] == 'R')
-            return true;
-    }
-    return false;
-}
-
-bool hasSplayFlag(char *arg) {
-    for (int i = 1; arg[i]; i++) {
-        if (arg[i] == 'S')
-            return true;
-    }
-    return false;
-}
-
-bool hasLLRBFlag(char *arg) {
-    for (int i = 1; arg[i]; i++) {
-        if (arg[i] == 'L')
-            return true;
-    }
-    return false;
-}
 
 int main(int argc, char *argv[]) {
     srand(time(0));
-    TreeDraw<long, long> td;
-    AVL<long, long> avl;
-    BinarySearchTree<long, long> bst;
-    //LeftLeaningRedBlack<long, long> llrb;
-    LLRB<long,long> llrb;
-    RedBlack<long, long> rb;
-    splay_tree<long> splay;
+    TreeDraw<char, long> td;
+    Dict<char, long> rb;
+    AVL<char, long> avl;
     int prev = 0, curr = 1;
-    for (int i = 0; i < atoi(argv[2]); i++) {
+    string sed = "ASEARCHINGEXAMPLEWITHALOTOFKEYS";
+    for (int i = 0; i < 66; i++) {
         int next = prev + curr;
         prev = curr;
         curr = next;
-        int p = rand() % RAND_MAX;
-        llrb.insert(p, i);
-        rb.insert(p,i);
-        avl.insert(p, i);
-        bst.insert(p,i);
-        splay.insert(p);
+        if (i < sed.length()) {
+            rb.add(sed[i],i);
+            avl.insert(sed[i], i);
+        } else {
+            int p = rand() % 99;
+            rb.add(p, i);
+            avl.insert(p, i);
+        }
+        if (i == 33) {
+            td.mark(rb.rootNode(), rb.nil(), REDBLACK);
+            td.mark(avl.rootNode(), avl.nil(), AVLT);
+        }
     }
-    if (hasAVLFlag(argv[1]))
-        td.mark(avl.rootNode(), avl.nil(), AVLT);
-    if (hasBSTFlag(argv[1]))
-        td.mark(bst.rootNode(), bst.nil(), BST);
-    if (hasLLRBFlag(argv[1]))
-        td.mark(llrb.rootNode(), llrb.nil(), REDBLACK);
-    if (hasRBFlag(argv[1]))
-        td.mark(rb.rootNode(), rb.nil(), REDBLACK);
-    if (hasSplayFlag(argv[1]))
-        td.mark(splay.rootNode(), splay.nil(), AVLT);
+    td.mark(rb.rootNode(), rb.nil(), REDBLACK);
+    td.mark(avl.rootNode(), avl.nil(), AVLT);
     td.drawTree();
     return 0;
 }

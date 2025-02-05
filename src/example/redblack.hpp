@@ -29,7 +29,7 @@ SOFTWARE.
 #include <limits>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "treenode.hpp"
+#include "../include/treenode.hpp"
 using namespace std;
 
 //Top down single pass 2-3-4 RedBlack tree
